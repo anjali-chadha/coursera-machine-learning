@@ -15,6 +15,8 @@ function centroids = computeCentroids(X, idx, K)
 
 % You need to return the following variables correctly.
 centroids = zeros(K, n);
+cluster_sum = zeros(K,n); % This matrix represents the sum of all points presented in a cluster
+cluster_count = zeros(K); % This vector will store the count of points allocated to each cluster
 
 
 % ====================== YOUR CODE HERE ======================
@@ -25,16 +27,19 @@ centroids = zeros(K, n);
 %
 % Note: You can use a for-loop over the centroids to compute this.
 %
+for i = 1: size(X,1)
+  cluster_indx = idx(i);
+  cluster_count(cluster_indx)++ ;
+  
+  for j = 1: size(X,2)
+    cluster_sum(cluster_indx, j) += X(i,j);
+  end
+ end  
 
-
-
-
-
-
-
+for i = 1:K
+  centroids(i,:) = cluster_sum(i,:)/cluster_count(i);
+end
 
 % =============================================================
-
-
 end
 

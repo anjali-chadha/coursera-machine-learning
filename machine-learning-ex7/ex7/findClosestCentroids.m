@@ -20,8 +20,25 @@ idx = zeros(size(X,1), 1);
 %
 % Note: You can use a for-loop over the examples to compute this.
 %
-
-
+for i= 1:size(X,1)
+  closest_centroid_distance = inf;
+  closest_centroid_index = 0;
+  
+  % This for loop iterates over all the K centroids of K clusters.
+  for j = 1:K
+    
+    % This is the innermost for loop for calculating the squared distance
+    % between the centroid and X point
+    distance = 0;
+    for d = 1:size(X,2)
+      distance += (centroids(j, d) - X(i,d))^2;
+    end  
+    if distance < closest_centroid_distance
+      closest_centroid_distance = distance;
+      closest_centroid_index = j;
+  end 
+  idx(i) = closest_centroid_index;
+end  
 
 
 

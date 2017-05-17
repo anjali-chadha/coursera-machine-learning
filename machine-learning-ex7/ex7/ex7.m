@@ -121,6 +121,10 @@ img_size = size(A);
 % This gives us our dataset matrix X that we will use K-Means on.
 X = reshape(A, img_size(1) * img_size(2), 3);
 
+% Draws a 3-D plot. The three dimensions are red, green and blue color
+% intensities of each pixel in the image.
+scatter3(X(:,1), X(:,2), X(:,3));
+
 % Run your K-Means algorithm on this data
 % You should try different values of K and max_iters here
 K = 16; 
@@ -134,6 +138,16 @@ initial_centroids = kMeansInitCentroids(X, K);
 % Run K-Means
 [centroids, idx] = runkMeans(X, initial_centroids, max_iters);
 
+figure;
+
+% This will draw the centroids on the 3-D plot
+scatter3(centroids(:,1), centroids(:, 2), centroids(:,3), 40, ...
+  'MarkerEdgeColor','k',...
+  'MarkerFaceColor',[1 1 1]);
+hold;  
+palette = hsv(K + 1);
+colors = palette(idx, :);
+scatter(X(:,1), X(:,2), 15, colors);
 fprintf('Program paused. Press enter to continue.\n');
 pause;
 
