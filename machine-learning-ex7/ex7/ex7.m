@@ -143,11 +143,11 @@ figure;
 % This will draw the centroids on the 3-D plot
 scatter3(centroids(:,1), centroids(:, 2), centroids(:,3), 40, ...
   'MarkerEdgeColor','k',...
-  'MarkerFaceColor',[1 1 1]);
+  'MarkerFaceColor',[0 0 0], 'filled');
 hold;  
 palette = hsv(K + 1);
 colors = palette(idx, :);
-scatter(X(:,1), X(:,2), 15, colors);
+scatter3(X(:,1), X(:,2),X(:, 3), 15, colors);
 fprintf('Program paused. Press enter to continue.\n');
 pause;
 
